@@ -1,35 +1,36 @@
 'use strict';
 
-window.onload = function () {
+let myInterval;
+let timerCounter;
+let downloadTimer;
+let images = ["./img/2.jpg", "./img/3.jpg", "./img/4.png", "./img/1.jpg"], x = -1;
 
-    document.onkeydown = function (event) {
-        let buttons = document.querySelectorAll('.btn-wrapper button');
-        buttons.forEach(function(btn){
-            btn.classList.remove('blue');
+function counter () {
+    let timeLeft = 9;
+    downloadTimer = setInterval(function f(){
+        document.getElementById("timer").innerText = timeLeft;
+        timeLeft -= 1;
+        if(timeLeft <= 0)
+            clearInterval(downloadTimer);
+    }, 1000);
+}
+function displayNextImage() {
+    x = (x === images.length - 1) ? 0 : x + 1;
+    document.getElementById("img").src = images[x];
 
-        });
-        if (event.key === 'Enter') {
-            enter.classList.add('blue');
-        }
-        if (event.key === 's') {
-            s.classList.add('blue');
-        }
-        if (event.key === 'e') {
-            e.classList.add('blue');
-        }
-        if (event.key === 'o') {
-            o.classList.add('blue');
-        }
-        if (event.key === 'n') {
-            n.classList.add('blue');
-        }
-        if (event.key === 'l') {
-            l.classList.add('blue');
-        }
-        if (event.key === 'z') {
-            z.classList.add('blue');
-        }
+}
+myInterval = setInterval(displayNextImage, 10000);
+timerCounter = setInterval(counter, 10000);
 
 
-    }
-};
+
+document.getElementById('stop').addEventListener('click', function () {
+    clearInterval(myInterval);
+    clearInterval(timerCounter);
+    clearInterval(downloadTimer);
+
+});
+document.getElementById('resume').addEventListener('click', function () {
+    myInterval = setInterval(displayNextImage, 10000);
+    timerCounter = setInterval(counter, 10000);
+});

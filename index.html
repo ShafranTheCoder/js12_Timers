@@ -7,23 +7,34 @@
     <title>Banners</title>
     <style>
       .image-to-show {
+        position: absolute;
+        width: 400px;
+        height: 400px;
+      }
+      .image-to-show.hidden {
+        position: absolute;
+        visibility: hidden;
         width: 400px;
         height: 400px;
       }
 
       .images-wrapper {
+        position: relative;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
       }
     </style>
   </head>
-  <body>
-    <div class="images-wrapper">
-      <img src="./img/1.jpg" alt="image of game" class="image-to-show" />
-      <img src="./img/2.jpg" alt="image of game" class="image-to-show" />
-      <img src="./img/3.JPG" alt="image of game" class="image-to-show" />
-      <img src="./img/4.png" alt="image of game" class="image-to-show" />
+  <body onload="counter()">
+    <div id="menu">
+    <button id="stop">STOP</button>
+    <button id="resume">RESUME</button>
+      <span id="timer" ></span>
     </div>
+    <div class="images-wrapper">
+      <img id="img" src="./img/1.jpg" alt="image of game" class="image-to-show" />
+    </div>
+    <script src="js/main.js"></script>
   </body>
 </html>
